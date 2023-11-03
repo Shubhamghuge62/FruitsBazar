@@ -1,0 +1,18 @@
+{
+  "sqltools.connections": [
+    {
+      "mysqlOptions": {
+        "authProtocol": "default",
+        "enableSsl": "Disabled"
+      },
+      "previewLimit": 50,
+      "server": "database-1.cwpzyr7ty9rt.eu-north-1.rds.amazonaws.com",
+      "port": 3306,
+      "driver": "MySQL",
+      "name": "databs",
+      "username": "admin",
+      "password": "password",
+      "database": "database-1"
+    }
+  ]
+}
