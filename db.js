@@ -55,6 +55,21 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
+// Read (GET single product)
+app.get("/api/product/:id", async (req, res) => {
+  const { id } = req.params;
+  try {
+    const [results] = await pool.execute(
+      "SELECT * FROM products where pdt_id=?",
+      [id]
+    );
+    res.json(results);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred." });
+  }
+});
+
 // Read (GET slider)
 app.get("/api/slider", async (req, res) => {
   try {
@@ -95,11 +110,11 @@ app.get("/api/products/:id", async (req, res) => {
 });
 
 // Update (PUT)
-app.put("/api/items/:id", async (req, res) => {
+app.put("/api/products/:id", async (req, res) => {
   const { id } = req.params;
   const { name } = req.body;
   try {
-    await pool.execute("UPDATE items SET name = ? WHERE id = ?", [name, id]);
+    await pool.execute("UPDATE products SET name = ? WHERE id = ?", [name, id]);
     res.json({ id, name });
   } catch (error) {
     console.error(error);

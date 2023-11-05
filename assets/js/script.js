@@ -237,7 +237,7 @@ async function getAllProducts() {
       <div class="contain-product layout-default">
         <div class="product-thumb">
           <a
-            href="single_product.php?status=singleproduct&&id=`+item.pdt_id+`"
+            href="single_product.html?id=`+item.pdt_id+`"
             class="link-to-product"
           >
             <img
