@@ -67,4 +67,53 @@ async function getProduct() {
   btn_img[0].value = product.pdt_img;
   //   console.log(data);
 }
+
+function clearInputFields(formId) {
+  const form = document.getElementById(formId);
+  const inputFields = form.querySelectorAll("input");
+
+  inputFields.forEach((input) => {
+    if (input.type !== "checkbox") {
+      input.value = ""; // Set the value to an empty string for text input fields
+    } else {
+      input.checked = false; // Uncheck checkboxes
+    }
+  });
+}
+
+async function add_to_cart(){
+    console.log("hello");
+    const url = "http://127.0.0.1:3000/api/addtocart";
+    let data = document.querySelectorAll(".form-control");
+    // console.log(data);
+    var product_name = data[0].value;
+    var product_price = data[1].value;
+    var product_image = data[2].value;
+    var product_id = data[3].value;
+  
+  
+    const postData = {
+      product_name: product_name,
+      price: product_price,
+      product_image: product_image,
+      product_id: product_id,
+      
+    };
+  const requestOptions = {
+    method: "POST", // HTTP method
+    headers: {
+      "Content-Type": "application/json", // Content type for JSON data
+    },
+    body: JSON.stringify(postData), // Convert the data to JSON format
+  };
+  var res = await fetch(url, requestOptions);
+  var result = await res.json();
+  // console.log(result);
+  if (result.message == "success") {
+    toastr.success("Added to cart successfully!");
+  } else toastr.error("Some error occurred, please try again!");
+
+  clearInputFields("form-register");
+}
+
 getProduct();

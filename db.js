@@ -153,6 +153,48 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+// ...
+
+// Add product details to the database
+// app.post("/api/addtocart", async (req, res) => {
+//   const product_id = req.body.product_id;
+//   const product_name = req.body.product_name;
+//   const price = req.body.price;
+
+//   try {
+//     await pool.execute(
+//       "INSERT INTO cart_items (product_id, product_name, price) VALUES (?, ?, ?)",
+//       [product_id, product_name, price]
+//     );
+//     res.json({ message: "Item added to the cart" });
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).json({ error: "An error occurred." });
+//   }
+// });
+
+app.post("/api/addtocart", async (req, res) => {
+  const product_id = req.body.product_id;
+  const product_name = req.body.product_name;
+  const price = req.body.price;
+  const product_image = req.body.product_image;
+  try {
+    await pool.execute(
+      "INSERT INTO cart_items (product_id, product_name, price, product_image) VALUES (?, ?, ?, ?)",
+      [product_id, product_name, price, product_image]
+    );
+    res.json({ message: "success" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "An error occurred." });
+  }
+});
+
+
+
+// ...
+
+
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
