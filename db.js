@@ -5,7 +5,7 @@ const mysql = require("mysql2/promise"); // Using the mysql2/promise library for
 
 const app = express();
 const port = 3000;
-
+const url = 'https://us-central1-organica-403517.cloudfunctions.net/store_cart_items_organica_web'
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());

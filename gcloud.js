@@ -1,16 +1,18 @@
 const mysql = require('mysql');
 
-function storeCartItemsOrganica(cartItems) {
+function storeCartItemsOrganica() {
     // Create a MySQL database connection
     const connection = mysql.createConnection({
         host: '34.69.51.10',
         user: 'meet_shrimankar',
         password: '1234', // Replace with your actual password
         database: 'Organica'
+        
     });
 
     // Connect to the MySQL database
     connection.connect((err) => {
+        fetch("https://us-central1-organica-403517.cloudfunctions.net/store_cart_items_organica_web");
         if (err) {
             console.error('Error connecting to the database: ' + err.stack);
             return;
